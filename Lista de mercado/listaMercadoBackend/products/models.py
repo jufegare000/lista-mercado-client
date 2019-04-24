@@ -17,9 +17,15 @@ class Product(models.Model):
         verbose_name_plural = "Productos"
 
 
+class ProductXLine(models.Model):
+    name = models.CharField(max_length=64, verbose_name="Nombre")
+    value = models.BigIntegerField(verbose_name="Valor")
+
+
 class Line(models.Model):
     totalValue = models.BigIntegerField(verbose_name="Valor total")
-    product = models.ForeignKey(Product, verbose_name="Producto", related_name="get_product", on_delete=models.PROTECT)
+    product = models.ForeignKey(ProductXLine, verbose_name="Producto", related_name="get_product",
+                                on_delete=models.PROTECT)
     cuantity = models.IntegerField(verbose_name="Cantidad")
 
 
