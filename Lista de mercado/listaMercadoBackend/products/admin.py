@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, SalesCheck
+from .models import Product, SalesCheck, Line
 
 
 # Register your models here.
@@ -10,7 +10,15 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('name', 'description')
 
 
+class LineInLine(admin.TabularInline):
+    model = Line
+    readonly_fields = ('product', 'value', 'cuantity', 'totalValue')
+
+
 class SalesCheckAdmin(admin.ModelAdmin):
+    inlines = [
+        LineInLine,
+    ]
     list_display = ('date', 'totalToPay')
     ordering = ('date',)
     search_fields = ('date', 'totalToPay')

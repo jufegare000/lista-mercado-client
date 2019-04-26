@@ -2,7 +2,7 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-from .serializer import ProductMiniSerializer, ProductSerializer
+from .serializer import ProductMiniSerializer, ProductSerializer, SalesCheckSerializer
 from .models import Product, SalesCheck
 
 
@@ -15,3 +15,8 @@ class ProductView(viewsets.ModelViewSet):
         movies = ProductSerializer.objects.all()
         serializer = ProductMiniSerializer(movies, many=True)
         return Response(serializer.data)
+
+
+class SalesCheckView(viewsets.ModelViewSet):
+    queryset = SalesCheck.objects.all()
+    serializer_class = SalesCheckSerializer
