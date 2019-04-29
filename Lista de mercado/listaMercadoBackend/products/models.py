@@ -31,18 +31,8 @@ class SalesCheck(models.Model):
     totalToPay = models.BigIntegerField(verbose_name="Total a pagar")
     date = models.DateTimeField(verbose_name="Fecha de venta", auto_now_add="true")
 
-    def save(self, *args, **kwargs):
-        try:
-            total = 0
-            for line in self.lines:
-                total += line.totalValue
-            self.totalToPay = total
-        except SalesCheck.DoesNotExist:
-            pass
-        super(SalesCheck, self).save(*args, **kwargs)
-
     def __str__(self):
-        return self.date
+        return str(self.date)
 
     class Meta:
         verbose_name = "Factura"
