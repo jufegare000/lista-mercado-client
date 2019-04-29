@@ -8,6 +8,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'value')
     ordering = ('name', 'value')
     search_fields = ('name', 'description')
+    readonly_fields = ('available',)
 
 
 class LineInLine(admin.TabularInline):

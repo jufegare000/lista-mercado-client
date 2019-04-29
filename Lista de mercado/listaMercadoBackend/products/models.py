@@ -9,6 +9,16 @@ class Product(models.Model):
     stock = models.IntegerField(verbose_name="Existencia")
     available = models.BooleanField(verbose_name="Disponible")
 
+    def save(self, *args, **kwargs):
+        try:
+            if self.stock > 0:
+                self.available = True
+            else:
+                self.available = False
+        except Product.DoesNotExist:
+            pass
+        super(Product, self).save(*args, **kwargs)
+
     def __str__(self):
         return self.name
 
@@ -20,6 +30,16 @@ class Product(models.Model):
 class SalesCheck(models.Model):
     totalToPay = models.BigIntegerField(verbose_name="Total a pagar")
     date = models.DateTimeField(verbose_name="Fecha de venta", auto_now_add="true")
+
+    def save(self, *args, **kwargs):
+        try:
+            total = 0
+            for line in self.lines:
+                total += line.totalValue
+            self.totalToPay = total
+        except SalesCheck.DoesNotExist:
+            pass
+        super(SalesCheck, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.date
@@ -35,6 +55,13 @@ class Line(models.Model):
     cuantity = models.IntegerField(verbose_name="Cantidad")
     totalValue = models.BigIntegerField(verbose_name="Valor total")
     salesCheck = models.ForeignKey(SalesCheck, related_name="lines", on_delete=models.CASCADE, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        try:
+            self.totalValue = self.value * self.cuantity
+        except Line.DoesNotExist:
+            pass
+        super(Line, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.product
