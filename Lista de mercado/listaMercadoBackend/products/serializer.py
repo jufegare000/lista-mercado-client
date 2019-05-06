@@ -23,7 +23,7 @@ class LineSerializer(serializers.ModelSerializer):
 class SalesCheckSerializer(serializers.ModelSerializer):
     class Meta:
         model = SalesCheck
-        fields = ('id', 'totalToPay', 'date', 'lineas')
+        fields = ('id', 'totalToPay', 'date', 'lines')
 
     def create(self, validated_data):
         lines_data = validated_data.pop('lines')
