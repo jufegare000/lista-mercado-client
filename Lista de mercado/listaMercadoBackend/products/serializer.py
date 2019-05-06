@@ -5,7 +5,7 @@ from .models import SalesCheck, Product, Line
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('id', 'name', 'value', 'descriptions', 'stock', 'available')
+        fields = ('id', 'name', 'value', 'description', 'stock', 'available')
 
 
 class ProductMiniSerializer(serializers.ModelSerializer):

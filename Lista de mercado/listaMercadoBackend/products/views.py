@@ -12,8 +12,8 @@ class ProductView(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
 
     def list(self, request, *args, **kwargs):
-        movies = ProductSerializer.objects.all()
-        serializer = ProductMiniSerializer(movies, many=True)
+        products = Product.objects.all()
+        serializer = ProductMiniSerializer(products, many=True)
         return Response(serializer.data)
 
 

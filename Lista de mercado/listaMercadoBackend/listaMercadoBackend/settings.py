@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'listaMercadoBackend.urls'
@@ -118,4 +119,5 @@ STATIC_URL = '/static/'
 
 CORS_ORIGIN_WHITELIST = (
     # poner aqui la url del front entre ''
+    'http://localhost:4200'
 )
