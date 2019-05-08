@@ -15,15 +15,16 @@ class ProductMiniSerializer(serializers.ModelSerializer):
 
 
 class LineSerializer(serializers.ModelSerializer):
-    class Model:
+    class Meta:
         model = Line
-        fields = ('id', 'product', 'values', 'cuantity', "totalValue")
+        fields = ( 'product', 'value', 'cuantity')
 
 
 class SalesCheckSerializer(serializers.ModelSerializer):
+    lines  = LineSerializer(many = True)
     class Meta:
         model = SalesCheck
-        fields = ('id', 'totalToPay', 'date', 'lines')
+        fields = ('totalToPay', 'date', 'lines')
 
     def create(self, validated_data):
         lines_data = validated_data.pop('lines')
