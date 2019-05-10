@@ -119,5 +119,5 @@ STATIC_URL = '/static/'
 
 CORS_ORIGIN_WHITELIST = (
     # poner aqui la url del front entre ''
-    'http://localhost:4200'
+    'http://localhost:3000'
 )

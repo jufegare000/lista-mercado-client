@@ -11,11 +11,6 @@ class ProductView(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-    def list(self, request, *args, **kwargs):
-        products = Product.objects.all()
-        serializer = ProductMiniSerializer(products, many=True)
-        return Response(serializer.data)
-
 
 class SalesCheckView(viewsets.ModelViewSet):
     queryset = SalesCheck.objects.all()
