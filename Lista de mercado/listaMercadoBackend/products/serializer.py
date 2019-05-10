@@ -17,12 +17,11 @@ class ProductMiniSerializer(serializers.ModelSerializer):
 class LineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Line
-        fields = ('product', 'value', 'cuantity')
+        fields = ( 'product', 'value', 'cuantity')
 
 
 class SalesCheckSerializer(serializers.ModelSerializer):
-    lines = LineSerializer(many=True)
-
+    lines  = LineSerializer(many = True)
     class Meta:
         model = SalesCheck
         fields = ('totalToPay', 'date', 'lines')
